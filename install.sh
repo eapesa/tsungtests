@@ -6,8 +6,10 @@ DTDPATH="$PREFIX/$DTD.dtd"
 
 echo "Updating DTD path in tsung.xml"
 ## 1- Generate copy of tsung.xml.ini and replace @@DTD_FILE@@
-cp xml/tsung.xml.ini xml/tsung.xml
-sed -i -e "s%@@DTDPATH@@%$DTDPATH%g" xml/tsung.xml
+# cp xml/tsung.xml.ini xml/tsung.xml
+sed -i -e "s%@@DTDPATH@@%$DTDPATH%g" xml/tsung.xml.ini
+mv xml/tsung.xml.ini xml/tsung.xml
+mv xml/tsung.xml.ini-e xml/tsung.xml.ini
 
 ## 2- Compile erl libs in /lib
 cd $PREFIX/lib
@@ -28,3 +30,9 @@ then
 fi
 
 sudo cp $PREFIX/lib/*.beam $ERLDIR/ebin
+
+## 4- Create a run file
+sed -i -e "s%@@PREFIX@@%$PREFIX%g" run.ini
+mv run.ini run
+mv run.ini-e run.ini
+chmod +x $PREFIX/run

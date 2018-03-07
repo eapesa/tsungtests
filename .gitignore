@@ -1,2 +1,5 @@
 *.beam
 *.xml
+run
+reports/*
+!reports/.gitkeep
